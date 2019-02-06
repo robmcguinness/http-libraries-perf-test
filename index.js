@@ -5,6 +5,7 @@ const got = require('got');
 const phin = require('phin').unpromisified;
 const request = require('request');
 const requestify = require('requestify');
+const simpleGet = require('simple-get');
 const superagent = require('superagent');
 const unirest = require('unirest');
 
@@ -123,6 +124,20 @@ suite.add('requestify POST request', {
     defer: true,
     fn: (defer) => {
         requestify.post(URL).then(() => defer.resolve());
+    }
+});
+
+suite.add('simple-get GET request', {
+    defer: true,
+    fn: (defer) => {
+        simpleGet.concat(URL, () => defer.resolve());
+    }
+});
+
+suite.add('simple-get POST request', {
+    defer: true,
+    fn: (defer) => {
+        simpleGet.concat({ url: URL, method: 'POST' }, () => defer.resolve());
     }
 });
 
