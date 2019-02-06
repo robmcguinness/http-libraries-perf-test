@@ -1,15 +1,21 @@
-var http = require('http');
-var axios = require('axios');
-var superagent = require('superagent');
-var request = require('request');
+const http = require('http');
+const axios = require('axios');
+const fetch = require('node-fetch');
+const got = require('got');
+const phin = require('phin').unpromisified;
+const request = require('request');
+const requestify = require('requestify');
+const superagent = require('superagent');
+const unirest = require('unirest');
 
-var nock = require('nock');
-var HOST = 'test-perf';
+const nock = require('nock');
+const HOST = 'test-perf';
+const URL = `http://${HOST}/test`;
 
 axios.defaults.baseURL = `http://${HOST}`;
 
-var Benchmark = require('benchmark');
-var suite = new Benchmark.Suite;
+const Benchmark = require('benchmark');
+const suite = new Benchmark.Suite;
 
 nock('http://test-perf').persist()
     // .log(console.log)
@@ -19,7 +25,7 @@ nock('http://test-perf').persist()
 suite.add('http.request POST request', {
     defer: true,
     fn: (defer) => {
-        var req = http.request({ host: HOST, path: '/test', method: 'POST' }, (res) => {
+        const req = http.request({ host: HOST, path: '/test', method: 'POST' }, (res) => {
             res.resume().on('end', () => defer.resolve());
         });
         req.write();
@@ -50,31 +56,101 @@ suite.add('axios POST request', {
     }
 });
 
+suite.add('got GET request', {
+    defer: true,
+    fn: (defer) => {
+        got.get(URL).then(()=> defer.resolve());
+    }
+});
+
+suite.add('got POST request', {
+    defer: true,
+    fn: (defer) => {
+        got.post(URL).then(() => defer.resolve());
+    }
+});
+
+suite.add('fetch GET request', {
+    defer: true,
+    fn: (defer) => {
+        fetch(URL).then(() => defer.resolve())
+    }
+});
+
+suite.add('fetch POST request', {
+    defer: true,
+    fn: (defer) => {
+        fetch(URL, {method: 'POST'}).then(() => defer.resolve());
+    }
+});
+
+suite.add('phin GET request', {
+    defer: true,
+    fn: (defer) => {
+        phin(URL, () => defer.resolve());
+    }
+});
+
+suite.add('phin POST request', {
+    defer: true,
+    fn: (defer) => {
+        phin({ url: URL, method: 'POST' }, () => defer.resolve());
+    }
+});
+
+suite.add('request GET request', {
+    defer: true,
+    fn: (defer) => {
+        request(URL, () => defer.resolve());
+    }
+});
+
+suite.add('request POST request', {
+    defer: true,
+    fn: (defer) => {
+        request.post({ url: URL }, () => defer.resolve());
+    }
+});
+
+suite.add('requestify GET request', {
+    defer: true,
+    fn: (defer) => {
+        requestify.get(URL).then(() => defer.resolve());
+    }
+});
+
+suite.add('requestify POST request', {
+    defer: true,
+    fn: (defer) => {
+        requestify.post(URL).then(() => defer.resolve());
+    }
+});
+
 suite.add('superagent GET request', {
     defer: true,
     fn: (defer) => {
-        superagent.get(`http://${HOST}/test`).end(() => { defer.resolve(); });
+        superagent.get(URL).end(() => { defer.resolve(); });
     }
 });
 
 suite.add('superagent POST request', {
     defer: true,
     fn: (defer) => {
-        superagent.post(`http://${HOST}/test`).send().end(() => defer.resolve());
+        superagent.post(URL).send().end(() => defer.resolve());
     }
 });
 
-suite.add('Request GET request', {
+suite.add('unirest GET request', {
     defer: true,
     fn: (defer) => {
-        request(`http://${HOST}/test`, () => defer.resolve());
+        unirest.get(URL).end(() => { defer.resolve(); });
     }
 });
 
-suite.add('Request POST request', {
+suite.add('unirest POST request', {
     defer: true,
     fn: (defer) => {
-        request.post({ url: `http://${HOST}/test` }, () => defer.resolve());
+        unirest.post(URL).send().end(() => defer.resolve());
     }
 });
 
