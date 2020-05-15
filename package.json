@@ -9,19 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nik-kor/http-libraries-perf-test.git"
+    "url": "git+https://github.com/robmcguinness/http-libraries-perf-test.git"
   },
   "keywords": [
     "axios",
     "superagent",
     "performance"
   ],
-  "author": "Nikita Korotkih",
+  "author": "Rob McGuinness",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nik-kor/http-libraries-perf-test/issues"
+    "url": "https://github.com/robmcguinness/http-libraries-perf-test/issues"
   },
-  "homepage": "https://github.com/nik-kor/http-libraries-perf-test#readme",
+  "homepage": "https://github.com/robmcguinness/http-libraries-perf-test#readme",
   "dependencies": {
     "axios": "0.19.2",
     "benchmark": "2.1.4",
