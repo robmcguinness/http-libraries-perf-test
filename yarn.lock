@@ -48,6 +48,13 @@
   dependencies:
     "@types/node" "*"
 
+abort-controller@^3.0.0:
+  version "3.0.0"
+  resolved "https://packages.availity.com/artifactory/api/npm/availity-npm-all/abort-controller/-/abort-controller-3.0.0.tgz#eaf54d53b62bae4138e809ca225c8439a6efb392"
+  integrity sha1-6vVNU7YrrkE46AnKIlyEOabvs5I=
+  dependencies:
+    event-target-shim "^5.0.0"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -160,6 +167,11 @@ end-of-stream@^1.1.0:
   dependencies:
     once "^1.4.0"
 
+event-target-shim@^5.0.0:
+  version "5.0.1"
+  resolved "https://packages.availity.com/artifactory/api/npm/availity-npm-all/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
+  integrity sha1-XU0+vflYPWOlMzzi3rdICrKwV4k=
+
 fast-safe-stringify@^2.0.7:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/fast-safe-stringify/-/fast-safe-stringify-2.0.7.tgz#124aa885899261f68aedb42a7c080de9da608743"
@@ -246,6 +258,19 @@ keyv@^4.0.0:
   dependencies:
     json-buffer "3.0.1"
 
+ky-universal@^0.6.0:
+  version "0.6.0"
+  resolved "https://packages.availity.com/artifactory/api/npm/availity-npm-all/ky-universal/-/ky-universal-0.6.0.tgz#a91c265c80c38f750e65bbc6d72df16f5b58691f"
+  integrity sha1-qRwmXIDDj3UOZbvG1y3xb1tYaR8=
+  dependencies:
+    abort-controller "^3.0.0"
+    node-fetch "^2.6.0"
+
+ky@^0.19.1:
+  version "0.19.1"
+  resolved "https://packages.availity.com/artifactory/api/npm/availity-npm-all/ky/-/ky-0.19.1.tgz#c533884028c83f78167d12905dfecaf6dd760bec"
+  integrity sha1-xTOIQCjIP3gWfRKQXf7K9t12C+w=
+
 lodash@^4.17.13, lodash@^4.17.4:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
@@ -308,7 +333,7 @@ nock@12.0.3:
     lodash "^4.17.13"
     propagate "^2.0.0"
 
-node-fetch@2.6.0:
+node-fetch@2.6.0, node-fetch@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
   integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==

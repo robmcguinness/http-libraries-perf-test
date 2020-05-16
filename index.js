@@ -5,6 +5,7 @@ const got = require('got');
 const phin = require('phin').unpromisified;
 const simpleGet = require('simple-get');
 const superagent = require('superagent');
+const ky = require('ky-universal');
 
 const nock = require('nock');
 const HOST = 'localhost';
@@ -65,6 +66,20 @@ suite.add('got POST request', {
     defer: true,
     fn: (defer) => {
         got.post(URL).then(() => defer.resolve());
+    }
+});
+
+suite.add('ky GET request', {
+    defer: true,
+    fn: (defer) => {
+        ky.get(URL).then(()=> defer.resolve());
+    }
+});
+
+suite.add('ky POST request', {
+    defer: true,
+    fn: (defer) => {
+        ky.post(URL).then(() => defer.resolve());
     }
 });
 
