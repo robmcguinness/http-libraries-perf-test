@@ -1,5 +1,6 @@
 const http = require('http');
 const axios = require('axios');
+const gaxios = require('gaxios');
 const fetch = require('node-fetch');
 const got = require('got');
 const phin = require('phin').unpromisified;
@@ -12,6 +13,7 @@ const HOST = 'localhost';
 const URL = `http://${HOST}/test`;
 
 axios.defaults.baseURL = `http://${HOST}`;
+gaxios.instance.defaults.baseURL = `http://${HOST}`;
 
 const Benchmark = require('benchmark');
 const suite = new Benchmark.Suite;
@@ -52,6 +54,26 @@ suite.add('axios POST request', {
     defer: true,
     fn: (defer) => {
         axios.post('/test').then(() => defer.resolve());
+    }
+});
+
+suite.add('gaxios GET request', {
+    defer: true,
+    fn: (defer) => {
+        gaxios.request({
+            url: '/test',
+            method: 'GET'
+        }).then(() => defer.resolve())
+    }
+});
+
+suite.add('gaxios POST request', {
+    defer: true,
+    fn: (defer) => {
+        gaxios.request({
+            url: '/test',
+            method: 'POST'
+        }).then(() => defer.resolve());
     }
 });
 
